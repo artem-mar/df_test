@@ -1,5 +1,5 @@
 import React from "react";
-import { render, within } from "@testing-library/react";
+import { render, within, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import graphs from "../src/mocks/graphs";
@@ -16,9 +16,9 @@ test("App renders", () => {
   render(<App />);
 });
 
-test("There is a dropdown with all the available graphs", () => {
+test("There is a dropdown with all the available graphs", async () => {
   const { getByRole } = setup(<App />);
-  const options = within(getByRole("combobox")).getAllByRole("option");
+  const options = await waitFor(() => within(getByRole('combobox')).getAllByRole('option'));
 
   expect(options.length).toBe(graphs.length);
 });
@@ -27,7 +27,7 @@ test("Graph selected by dropdown is rendered", async () => {
   const selectedGraph = 2;
   const { getByRole, findByText, user } = setup(<App />);
 
-  user.selectOptions(getByRole("combobox"), `${selectedGraph}`);
+  await waitFor(() => user.selectOptions(getByRole("combobox"), `${selectedGraph}`));
 
   for (let node of graphs[selectedGraph].nodes) {
     await findByText(node.name);
@@ -40,7 +40,7 @@ test("Nodes in simple graph are organized into columns", async () => {
 
   const correctColumns = [["start"], ["foo", "bar"], ["end1", "end2"]];
 
-  user.selectOptions(getByRole("combobox"), `${selectedGraph}`);
+  await waitFor(() => user.selectOptions(getByRole("combobox"), `${selectedGraph}`));
 
   for (let idx = 0; idx < correctColumns.length; idx++) {
     const col = correctColumns[idx];

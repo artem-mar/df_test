@@ -1,13 +1,16 @@
 module.exports = {
-  setupFilesAfterEnv: ["./jest.setup.ts"],
-  testEnvironment: "jsdom",
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+  testEnvironment: 'jsdom',
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    '^.+\\.tsx?$': 'ts-jest',
   },
-  extensionsToTreatAsEsm: [".ts", ".tsx"],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   globals: {
-    "ts-jest": {
+    'ts-jest': {
       useESM: true,
     },
+  },
+  moduleNameMapper: {
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
 };

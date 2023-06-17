@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { GraphEdge } from '../../types/graph';
+import { GraphEdge, GraphNode } from '../../types/graph';
 import s from './Edge.module.css';
 
 type Props = {
   edge: GraphEdge;
+  columns: GraphNode[][];
 };
 type Rects = {
   from: DOMRect | undefined;
   to: DOMRect | undefined;
 };
 
-const Edge = ({ edge }: Props) => {
+const Edge = ({ edge, columns }: Props) => {
   const [rects, setRects] = useState<Rects>({ from: undefined, to: undefined });
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Edge = ({ edge }: Props) => {
       from: document.getElementById(`${edge.fromId}`)?.getBoundingClientRect(),
       to: document.getElementById(`${edge.toId}`)?.getBoundingClientRect(),
     });
-  }, [edge]);
+  }, [edge, columns]);
 
   const { from, to } = rects;
 

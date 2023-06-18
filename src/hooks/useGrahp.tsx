@@ -5,12 +5,12 @@ import Graph from '../types/graph';
 const useGraph = (id: string): Graph => {
   const [selectedGraph, setSelectedGraph] = useState<Graph>({ edges: [], nodes: [] });
 
-  const changeSelectedGraph = (id: string) => {
+  const getGraph = (id: string) => {
     fetchGraph(id).then((graph) => setSelectedGraph(graph));
   };
 
   useEffect(() => {
-    id && changeSelectedGraph(id);
+    id && getGraph(id);
   }, [id]);
 
   return selectedGraph;

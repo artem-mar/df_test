@@ -3,7 +3,7 @@ import GraphType, { GraphEdge } from '../../types/graph';
 import Edge from '../Edge/Edge';
 import s from './Graph.module.css';
 import DragnDrop from '../DragnDrop/DragnDrop';
-import useSortGraph from '../../helpers/useSortGraph';
+import useSortGraph from '../../hooks/useSortGraph';
 
 type Props = {
   selectedGraph: GraphType;

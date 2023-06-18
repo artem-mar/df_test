@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import Graph from "./components/Graph/Graph";
 import { fetchGraphsList } from "./api";
 import s from "./App.module.css";
-import useGraph from "./helpers/useGrahp";
+import useGraph from "./hooks/useGrahp";
 
 function App() {
   const [graphId, setGraphId] = useState('');

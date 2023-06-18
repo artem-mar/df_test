@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Graph, { GraphNode } from '../types/graph';
-import sortNodes from './sortNodes';
+import sortNodes from '../helpers/sortNodes';
 
 const useSortGraph = (graph: Graph): [GraphNode[][], (columns: GraphNode[][]) => void] => {
   const [graphColumns, setGraphColumns] = useState<GraphNode[][]>([]);

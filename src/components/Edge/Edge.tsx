@@ -1,6 +1,6 @@
 import React from 'react';
 import { GraphEdge, GraphNode } from '../../types/graph';
-import useEdgePosition from '../../helpers/useEdgePosition';
+import useEdgePosition from '../../hooks/useEdgePosition';
 import s from './Edge.module.css';
 
 type Props = {

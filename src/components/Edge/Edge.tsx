@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { GraphEdge, GraphNode } from '../../types/graph';
+import useEdgePosition from '../../helpers/useEdgePosition';
 import s from './Edge.module.css';
 
 type Props = {
   edge: GraphEdge;
   columns: GraphNode[][];
 };
-type Rects = {
-  from: DOMRect | undefined;
-  to: DOMRect | undefined;
-};
 
 const Edge = ({ edge, columns }: Props) => {
-  const [rects, setRects] = useState<Rects>({ from: undefined, to: undefined });
-
-  useEffect(() => {
-    setRects({
-      from: document.getElementById(`${edge.fromId}`)?.getBoundingClientRect(),
-      to: document.getElementById(`${edge.toId}`)?.getBoundingClientRect(),
-    });
-  }, [edge, columns]);
-
-  const { from, to } = rects;
+  const rects = useEdgePosition(edge.fromId, edge.toId, columns);
 
   return (
     <svg className={s.edge}>
@@ -38,13 +26,13 @@ const Edge = ({ edge, columns }: Props) => {
           <polygon points="0 0, 20 4, 0 8" />
         </marker>
       </defs>
-      {from && to && (
+      {rects?.from && rects?.to && (
         <line
           className={s.line}
-          x1={from.right}
-          y1={from.bottom - from.height / 2}
-          x2={to.left}
-          y2={to.bottom - to.height / 2}
+          x1={rects.from.right}
+          y1={rects.from.bottom - rects.from.height / 2}
+          x2={rects.to.left}
+          y2={rects.to.bottom - rects.to.height / 2}
           stroke="#444444"
           markerEnd="url(#arrow)"
         />
